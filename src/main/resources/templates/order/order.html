@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order System</title>
+    <style>
+        /* CSS cho trang */
+        body {
+            font-family: Arial, sans-serif;
+           background-image: url("https://res.cloudinary.com/dwu92ycra/image/upload/v1734019670/happy-waitress-giving-coffee-customers-while-serving-them-coffee-shop_bekfmp.jpg");
+            margin: 0;
+            padding: 0;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        li{
+            list-style: none;
+        }
+        a{
+           text-decoration: none;
+        }
+    .container{
+        display: flex;
+        gap: 20px;
+    justify-content: space-between;
+        align-items: start;
+        padding: 20px;
+    }
+    .container_left{
+        width: 60%;
+
+    }
+    .container_left-top{
+        display: flex;
+        overflow: hidden;
+        padding: 10px;
+        background-color: rgba(0, 0 , 0 , 0.5);
+        gap: 15px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 0 1px 1px white;
+        color: white;
+        border-radius: 10px;
+    }
+    .container_left-top > *{
+        color: white !important;
+    }
+
+    .table-info{
+       flex-grow: 1;
+    }
+    .btns{
+        width: 100px;
+        border-radius: 5px;
+        background-color: transparent;
+        box-shadow: 0 0 1px 1px red;
+        border: none;
+    }
+
+    .title-menu{
+        position: sticky;
+        top:0;
+        text-align: center;
+        box-shadow: 0 0 1px 1px white;
+        color: white;
+    }
+    .list_food{
+        margin-top: 25px;
+        width: 100%;
+        border: 1px solid green;
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 10px;
+        overflow-y: scroll;
+        height: 300px;
+
+    }
+    .menu-list{
+        width: 100%;
+    }
+    .menu-item{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu-item:last-child{
+        border-bottom: 0;
+    }
+    .menu-item > *{
+        color: white;
+    }
+    .container_right{
+        flex-grow: 1;
+     padding: 10px;
+        background-color: rgba(0,0,0,0.5);
+        box-shadow: 0 0 1px 2px white;
+        border-radius: 15px;
+
+    }
+    .container_right >*{
+        color: white;
+    }
+    .order-summary > *{
+        color: white;
+    }
+
+    th{
+        width: 100px;
+        text-align: center;
+    }
+    td,th{
+        border: 1px solid black;
+    }
+
+    th:first-child,td:first-child{
+        width: 150px;
+        text-align: left;
+        margin-left: 10px;
+    }
+
+        td{
+            text-align: center;
+
+        }
+        tr{
+            min-height: 50px;
+            padding: 10px;
+        }
+        .mw{
+            max-width: 25%;
+        }
+        .truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Cắt sau 2 dòng */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Thêm dấu ... khi cắt ngắn */
+            word-break: break-word;
+        }
+        .btns2{
+       width: 40px;height: 40px;
+            border-radius: 50%;
+            box-shadow: 0 0 1px 2px green;
+            background-color: transparent;
+            display:                flex;
+            justify-content: center      ;
+            align-items: center;
+            cursor: pointer;
+        }
+        .foodOrdered{
+            margin: 5px;
+            display: grid;
+            grid-template-columns: 40% 1fr 1fr 1fr;
+            width: 100%;
+            border-bottom: 2px solid orange;
+
+        }
+        .foodOrdered >p{
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .an{
+            display: none;
+        }
+       
+    </style>
+</head>
+<body>
+<div th:replace="~{header.html}"></div>
+
+
+<div class="container">
+    <div class="container_left">
+        <div class="container_left-top">
+            <img style="width: 200px; border-radius: 50%" src="https://alameinegypt.com/cdn/shop/files/outdoor-tables-egypt-03_640x.jpg?v=1646244146"/>
+            <div class="table-info">
+                <h2   th:text="${foodOrders.tableO.name}">Bàn 1</h2>
+                <p th:text = "${foodOrders.tableO.description}">Thông tin bàn: Bàn gần cửa sổ</p>
+                <p th:text = "${foodOrders.tableO.type}">Thông tin bàn: Bàn gần cửa sổ</p>
+                <p th:text = "${foodOrders.tableO.persons}">Thông tin bàn: Bàn gần cửa sổ</p>
+            <button class="btns" th:classappend="${foodOrders.foodOrders.size() > 0 ? 'hien' : 'an'}" ><a th:href="@{/cancelOrderFood(tableId=${foodOrders.tableO.id})}" >Hủy</a></button>
+            </div>
+        </div>
+
+        <div class="container_left_bottom">
+
+            <div class="list_food" >
+                <h2 class="title-menu">Danh sách món ăn</h2>
+                <ul class="menu-list" th:each="food : ${foodOrders.foods}">
+                    <li class="menu-item" style="border-bottom: 1px solid orange">
+                        <div style="width: 50%;">
+                            <p class="truncate" style="margin: 0;padding: 0; font-size: large;font-weight: bold" th:text = "${food.name}">Phở bò</p>
+                            <p class="truncate" style="font-size: small" th:text = "${food.description}"></p>
+                        </div>
+                        <div style="width: 50%; display: flex;justify-content: space-between;align-items:  center">
+                            <p th:text = "${food.price} + 'VND'"></p>
+                            <form th:id="'orderForm_' + ${food.id}" action="/addOrder" method="post" style="display: none" >
+                                <input type="number" id="tableId" name="tableId" th:value="${foodOrders.tableO.id}" />
+                                <input type="number" id="foodId" name="foodId" th:value="${food.id}" />
+                                <input type="number" name="quantity" value="1"  />
+                            </form>
+                        </div>
+                        <button class="btns2" type="button" th:onclick="'submitOrderForm(' + ${food.id} + ')'" >+</button>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div  class="container_right">
+        <div class="bottom-section">
+            <div class="order-summary">
+
+                <div class="foodOrdered">
+                    <p>Tên món</p>
+                    <p>Giá</p>
+                    <p>Số lượng</p>
+                    <p>Action</p>
+                </div>
+                <div class="foodOrdered"  th:each="food : ${foodOrders.foodOrders}" >
+                    <p th:text="${food.name}">dfsfds</p>
+                    <p th:text="${food.price} + ' VND'"></p>
+                    <p th:text="${food.quantity}"></p>
+                    <p style="text-align: center"><a style="text-decoration: none;color: red" th:href="@{'/deleteOrderFood?foodId=' + ${food.id} + '&tableId=' + ${foodOrders.tableO.id}}">X</a>
+                    </p>
+
+
+                </div>
+            </div>
+            <h3 style="margin-top: 20px; font-size: medium" th:text = "'Tổng số món:' + ' ' + ${foodOrders.foodOrders.size()}"  ></h3>
+            <p style="font-weight: bold" th:text="'Tổng tiền: ' + ${foodOrders.totalPrice} + ' vnd'">Số tiền: eee VND</p>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</div>
+
+<script>
+    function submitOrderForm(foodId) {
+        // Tìm form tương ứng với foodId
+        var form = document.getElementById('orderForm_' + foodId);
+        // Gửi form đó
+        form.submit();
+    }
+</script>
+</body>
+</html>

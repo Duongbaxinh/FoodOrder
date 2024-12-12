@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa người dùng</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-cancel {
+            background-color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .btn-cancel:hover {
+            background-color: #a71d2a;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>Chỉnh sửa người dùng</h1>
+    <form action="/updateUser" method="post">
+        <input type="hidden" name="id" th:value="${user.id}" />
+
+
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" th:value="${user.email}" required />
+        </div>
+
+        <div class="form-group">
+            <label for="firstName">Họ</label>
+            <input type="text" id="firstName" name="firstName" th:value="${user.firstName}" />
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Tên</label>
+            <input type="text" id="lastName" name="lastName" th:value="${user.lastName}" />
+        </div>
+
+        <div class="form-group">
+            <label for="role">Vai trò</label>
+            <select id="role" name="role">
+                <option value="user" th:selected="${user.role == 'user'}">User</option>
+                <option value="admin" th:selected="${user.role == 'admin'}">Admin</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn">Lưu thay đổi</button>
+    </form>
+</div>
+</body>
+</html>

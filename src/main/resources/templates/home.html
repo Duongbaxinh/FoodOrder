@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../static/css/style.css">
+
+    <title>Table Grid</title>
+    <style>
+
+    .containers{
+
+        width: 100%;
+        min-height: 100vh;
+        height: 100%;
+        background-image: url("https://res.cloudinary.com/dwu92ycra/image/upload/v1734019330/young-female-barista-wear-face-mask-serving-take-away-hot-coffee-paper-cup-consumer-cafe_y1wh0i.jpg");
+        background-size: 100%;
+        position: relative;
+    }
+    .boxdown{
+
+        width:100%;
+        height: 100vh;
+		padding:20px 0;
+		box-sizing:border-box;
+    background-color: rgba(0,0,0,0.5);
+
+    }
+    .table-container{
+        display: grid;
+        width: 100%;
+        grid-template-columns: repeat(5,1fr);
+        gap: 10px;
+    }
+    .table-item{
+        display: flex;
+justify-content: center;
+        align-items: center;
+        min-height: 200px;
+        box-shadow: 0 0 2px 2px white;
+        border-radius: 15px;
+    }
+    .table-item:hover{
+        background-color: rgba(0,0,0,0.8);
+    }
+    .vip{
+        box-shadow: 0 0 2px 2px yellow !important;
+    }
+    </style>
+</head>
+<body>
+<div class="containers">
+    <div class="boxdown">
+
+    <div th:replace="~{header.html}"></div>
+    <div class="table-container" style="min-width: 100%; padding: 10px">
+
+        <div th:each="table : ${tables}" class="table-item" th:classappend="${table.type.toUpperCase() == 'VIP' ? ' vip' : ' regular'}">
+            <a style="text-decoration: none; font-size: large;color: white" th:href="@{/orderDetail(tableIds=${table.id})}">
+                <p class="test" th:text="${table.name}"></p>
+            </a>
+        </div>
+
+    </div>
+    </div>
+
+</div>
+</body>
+</html>

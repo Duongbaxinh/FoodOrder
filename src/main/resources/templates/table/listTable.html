@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .foodContainer {
+            display: flex;
+            gap: 20px;
+        }
+
+        .content {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <!-- Sidebar -->
+        <div class="col-md-3">
+            <div th:replace="~{sidebar.html}"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+          <div style="position:sticky;top:0; width:100%; background-color:white; padding-bottom:20px">
+            <h2  class="mb-4">Table List</h2>
+            <div class="mb-3" style="position:sticky;top:0;" >
+                <a href="/addTable" class="btn btn-primary" >Add New Table</a>
+            </div></div>
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+      
+                <tr th:each="table : ${tables}">
+                    <td th:text="${table.name}"></td>
+                    <td th:text="${table.persons}"></td>
+                    <td th:text="${table.type}"></td>
+                    <td th:text="${table.description}"></td>
+                    <td>
+                        <a th:href="@{/editTable(id=${table.id})}" class="btn btn-warning btn-sm">Edit</a>
+                        <a th:href="@{/deleteTableById(id=${table.id})}"
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('Are you sure you want to delete this table?');">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

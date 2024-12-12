@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .container{
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        gap: 20px;
+    }
+    .sidebar{
+        width: 300px;
+        height: 100%;
+        border-radius: 15px;
+        box-shadow: 0 0 1px 2px grey;
+        background: white;
+
+    }
+    .sidebox{
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    li{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px 10px;
+        background-color: #28a745;
+    }
+    ul{
+        padding: 0;
+        margin: 0;
+
+        width: 100%;
+        list-style: none;
+        display: flex;
+        justify-content: start;
+        flex-direction: column;
+        gap: 10px;
+    }
+</style>
+<body>
+
+<div class="container">
+
+    <div class="sidebar">
+  <div class="sidebox">
+      <h1>DashBoard</h1>
+      <ul>
+          <li><a href="/listFood">Mange Food</a></li>
+          <li><a href="/tables">Mange Table</a></li>
+          <li><a href="/listUser">Mange User</a></li>
+      </ul>
+  </div>
+    </div>
+    <div class="main">
+        list
+    </div>
+</div>
+</body>
+</html>

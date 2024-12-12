@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .containers{
+            
+            position:sticky;
+            top:0;
+            left:0;
+        }
+        .sidebar{
+            width: 300px;
+            height: 100%;
+            border-radius: 15px;
+            box-shadow: 0 0 1px 2px grey;
+            background: white;
+
+        }
+        .sidebox{
+            padding: 15px;
+            box-sizing: border-box;
+        }
+        li{
+            width: 100%;
+            box-sizing: border-box;
+            padding: 5px 10px;
+        
+        }
+        ul{
+            padding: 0;
+            margin: 0;
+			box-shadow:0 0 1px 2px grey;
+			border-radius:15px;
+            width: 100%;
+            list-style: none;
+            display: flex;
+            overflow: hidden;
+            justify-content: start;
+            flex-direction: column;
+            gap: 10px;
+        }
+        li {
+            display: inline-block;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        li a {
+            text-decoration: none;
+            color: black;
+        }
+
+        li.active {
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div class = "containers" style="min-width: 250px">
+    <h1>DashBoard</h1>
+        <ul id="menu">
+        <li  th:classappend="${active == 1 ? ' active' : ' regular'}"><a href="/listFood">Manage Food</a></li>
+        <li  th:classappend="${active == 0 ? ' active' : ' regular'}"><a href="/listTable">Manage Table</a></li>
+        <li  th:classappend="${active == 2 ? ' active' : ' regular'}"><a href="/listUser">Manage User</a></li>
+    </ul>
+
+</div>
+</body>
+
+</html>
